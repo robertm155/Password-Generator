@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Password Generator</title>
+    <link rel="stylesheet" href="./reset.css">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+    <div class="content">
+        <h2>Password Generator</h2><br>
+
+            <h3>Select Length:</h3>
+            <input id= "quantity" type="number" name="quantity" min="8" max="128" value=""><br>
+            Must be between 8 and 128 characters!
+            <br><br>
+         
+            <h3>Select Character Type:</h3>
+            <input type="checkbox" id="box1" onclick="upperbox()" value=""> Uppercase Letters<br>
+            <input type="checkbox" id="box2" onclick="lowerbox()" value=""> Lowercase Letters<br>
+            <input type="checkbox" id="box3" onclick="numberbox()" value=""> Numbers<br>
+            <input type="checkbox" id="box4" onclick="specialbox()" value=""> Special Characters<br><br>
+            <input type="button" onclick="generator()" value="Generate">
+            <br><br>
+            Generated Password<br>
+            <input type="text" id="yourPassword">
+        
+    </div>
+
+    <script type="text/javascript">
+
+        var all = [];
+        var uppercase = document.getElementById('box1');
+        var lowercase = document.getElementById('box2');
+        var number = document.getElementById('box3');
+        var special = document.getElementById('box4')
+
+
+        function upperbox(){
+            if (uppercase.checked == true){
+                all.push('ABCDEFGHIJKLMNOPQRSTUVWXYZ');}
+            else{
+                for( var i = 0; i < all.length; i++){
+                    if ( all[i] === 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'){
+                        all.splice(i,1);
+                    }}}}
+
+        function lowerbox(){
+            if (lowercase.checked == true){
+                all.push('abcdefghijklmnopqrstuvwxyz');}
+            else{
+                for( var i = 0; i < all.length; i++){
+                    if ( all[i] === 'abcdefghijklmnopqrstuvwxyz'){
+                        all.splice(i,1);
+                    }}}}
+
+        function numberbox(){
+            if (number.checked == true){
+                all.push('1234567890');}
+            else{
+                for( var i = 0; i < all.length; i++){
+                    if ( all[i] === '1234567890'){
+                        all.splice(i,1);
+                    }}}}
+
+        function specialbox(){
+            if (special.checked == true){
+                all.push("!#$%&'()*+,-./:;<=>?@[]^_`{|}~");}
+            else{
+                for( var i = 0; i < all.length; i++){
+                    if ( all[i] === "!#$%&'()*+,-./:;<=>?@[]^_`{|}~"){
+                        all.splice(i,1);
+                    }}}}
+        
+        function generator(){
+            var passwordLength = document.getElementById("quantity").value;
+            var joint = all.join();
+            var password =""
+            
+            for (var i = 0; i <= passwordLength - 1; i++){
+                password = password + joint.charAt(Math.floor(Math.random() * Math.floor(joint.length - 1)));
+            }
+            document.getElementById("yourPassword").value = password;
+        }
+    </script>
+
+    
+</body>
+</html>
